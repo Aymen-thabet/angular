@@ -1,0 +1,24 @@
+.residence-image {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .badge {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+  
+  .card {
+    border-radius: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  button {
+    margin-right: 5px;
+  }
+  

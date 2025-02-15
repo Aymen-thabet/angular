@@ -1,0 +1,64 @@
+<p class="text-center fs-4 fw-bold">🏡 Liste des Résidences</p>
+
+<!-- Barre de recherche -->
+<div class="mb-3">
+  <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="🔍 Rechercher par adresse..." />
+</div>
+
+<!-- Liste des résidences sous forme de cartes -->
+<div class="row">
+  <div class="col-md-4 mb-4" *ngFor="let r of filteredResidences">
+    <div class="card shadow-sm">
+      <img [src]="r.image" alt="{{ r.name }}" class="card-img-top residence-image">
+      <div class="card-body">
+        <h5 class="card-title">{{ r.name }}</h5>
+
+        <!-- Statut avec badge coloré -->
+        <span class="badge" [ngClass]="{
+          'bg-success': r.status === 'Disponible',
+          'bg-danger': r.status === 'Vendu',
+          'bg-warning text-dark': r.status === 'En Construction'
+        }">
+          <ng-container *ngIf="r.status === 'Disponible'">✔️ Disponible</ng-container>
+          <ng-container *ngIf="r.status === 'Vendu'">❌ Vendu</ng-container>
+          <ng-container *ngIf="r.status === 'En Construction'">🚧 En Construction</ng-container>
+        </span>
+
+        <div class="mt-3">
+          <!-- Bouton pour afficher l'adresse -->
+          <button class="btn btn-outline-primary btn-sm" (click)="toggleLocation(r.id)">
+            📍 Show Location
+          </button>
+          <p *ngIf="showLocation[r.id]" class="text-muted mt-2">📌 {{ r.address }}</p>
+        </div>
+
+        <div class="mt-3">
+          <!-- Bouton "Like" -->
+          <button class="btn btn-outline-danger btn-sm" (click)="addToFavorites(r)" *ngIf="!isFavorite(r)">
+            ❤️ Like
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="removeFromFavorites(r)" *ngIf="isFavorite(r)">
+            💔 Unlike
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Liste des favoris -->
+<h3 class="mt-5 text-center">⭐ Favoris</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr class="table-dark">
+      <th>🏠 Nom</th>
+      <th>📍 Adresse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let fav of favorites">
+      <td>{{ fav.name }}</td>
+      <td>{{ fav.address }}</td>
+    </tr>
+  </tbody>
+</table>
