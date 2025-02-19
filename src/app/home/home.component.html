@@ -1,53 +1,49 @@
-<!-- {{title}} <table class="table" border="3">
-
-
-    <tr>
-        <td>title</td>
-        <td>price </td>
-        <td>quantity</td>
-        <td>like</td>
-        <td>image</td>
-    </tr>
-    <tr *ngFor="let p of products">
-        <td> {{p.title}}</td>
-        <td> {{p.price}}</td>
-        <td> {{p.quantity}}</td>
-        <td> {{p.like}}</td>
-        <td> <img src={{p.img}} alt="iphone image" style="width: 50px;height: 20px;">
-        </td>
-    </tr>
-    </table>
-
-
-  -->
-
-  <input type="text" [(ngModel)]="color">
-  <input type="number" [(ngModel)]="prixProduit" placeholder="search by price"> <!--hedhi mta3 search-->
-  <div [style.backgroundColor]="color">
-      property binding
-  </div>
+<div class="container mt-4">
+    <!-- Search and Property Binding -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <input type="text" [(ngModel)]="color" class="form-control" placeholder="test the Property binding">
+      </div>
+      <div class="col-md-6">
+        <input type="number" [(ngModel)]="prixProduit" class="form-control" placeholder="Search by price">
+      </div>
+    </div>
+    
+    <!-- Dynamic Background Color -->
+    <div [style.backgroundColor]="color" class="py-3 text-center text-white">
+      <strong>Property Binding</strong>
+    </div>
   
-  <div class="row">
-      <div class="col-md-4" *ngFor="let product of products;let i = index">
-          <div *ngIf="product.price == prixProduit || prixProduit== null"> <!--hedhi mta3 search-->
-              <div class="card" style="width: 18rem;">
-                  <img class="card-img-top" [src]="product.img" alt="{{ product.title }}">
-                  <div class="card-body">
-                      <h5 class="card-title">{{ product.title }}</h5>
-                      <p class="card-text"><strong>Prix :</strong> {{ product.price }} TND</p>
-                      <p class="card-text"><strong>Quantité :</strong> {{ product.quantity }}</p>
-                      <p class="card-text"><strong>Likes :</strong> {{ product.like }}</p>
-                      <button class="btn btn-success" (click)="like(i)">Like</button>
+    <!-- Button to Add Product -->
+    <div class="text-center mb-4">
+      <button class="btn btn-primary" [routerLink]="['/add-product']">Ajouter un produit</button>
+    </div>
   
-                  </div>
-                  <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Autre info</li>
-                  </ul>
-                  <div class="card-body">
-                      <a href="#" class="card-link">Voir plus</a>
-                      <button class="btn btn-info" [disabled]="product.quantity==0" (click)="acheterProduit(product)">Acheter</button>
-                  </div>
-                   </div>
+    <!-- Product Cards Section -->
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let product of products; let i = index">
+        <div *ngIf="product.price == prixProduit || prixProduit == null">
+          <div class="card shadow-sm">
+            <img class="card-img-top" [src]="product.img" alt="{{ product.title }}" style="height: 200px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{ product.title }}</h5>
+              <p class="card-text"><strong>Prix:</strong> {{ product.price }} TND</p>
+              <p class="card-text"><strong>Quantité:</strong> {{ product.quantity }}</p>
+              <p class="card-text"><strong>Likes:</strong> {{ product.like }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <button class="btn btn-success" (click)="like(i)">Like</button>
+                <button class="btn btn-info" [disabled]="product.quantity == 0" (click)="acheterProduit(product)">Acheter</button>
               </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Autre info</li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Voir plus</a>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
   
