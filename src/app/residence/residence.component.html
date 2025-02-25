@@ -4,6 +4,9 @@
 <div class="mb-3">
   <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="🔍 Rechercher par adresse..." />
 </div>
+<div class="text-center mb-4">
+  <button class="btn btn-primary" [routerLink]="['/add-residence']">Ajouter une Résidence</button>
+</div>
 
 <!-- Liste des résidences sous forme de cartes -->
 <div class="row">
@@ -40,6 +43,7 @@
           <button class="btn btn-danger btn-sm" (click)="removeFromFavorites(r)" *ngIf="isFavorite(r)">
             💔 Unlike
           </button>
+          <button class="btn btn-info" [routerLink]="['/residenceDetail',r.id]"> Voir Details</button>
         </div>
       </div>
     </div>

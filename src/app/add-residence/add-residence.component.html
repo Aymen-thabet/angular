@@ -1,0 +1,38 @@
+<h1>Ajouter une Résidence</h1>
+
+
+
+<form [formGroup]="residenceForm">
+
+    <label>Nom</label>
+    <input type="text" class="form-control" placeholder="Nom de la résidence" formControlName="name">
+    <div *ngIf="residenceForm.controls['name'].invalid && residenceForm.controls['name'].touched" class="alert alert-danger">
+        <p *ngIf="residenceForm.controls['name'].hasError('required')">Le nom est obligatoire</p>
+        <p *ngIf="residenceForm.controls['name'].hasError('minlength')">Le nom doit contenir au moins 4 caractères</p>
+    </div>
+
+    <label>Adresse</label>
+    <input type="text" class="form-control" placeholder="Adresse" formControlName="address">
+    <div *ngIf="residenceForm.controls['address'].invalid && residenceForm.controls['address'].touched" class="alert alert-danger">
+        <p>L'adresse est obligatoire</p>
+    </div>
+
+    <label>Image (URL)</label>
+    <input type="text" class="form-control" placeholder="URL de l'image" formControlName="image">
+    <div *ngIf="residenceForm.controls['image'].invalid && residenceForm.controls['image'].touched" class="alert alert-danger">
+        <p>L'URL de l'image est obligatoire</p>
+        <p *ngIf="residenceForm.controls['image'].hasError('pattern')">Veuillez entrer une URL valide</p>
+    </div>
+
+    <label>Statut</label>
+    <select class="form-control" formControlName="status">
+        <option value="Disponible">Disponible</option>
+        <option value="Occupée">Occupée</option>
+    </select>
+    <div *ngIf="residenceForm.controls['status'].invalid && residenceForm.controls['status'].touched" class="alert alert-danger">
+        <p>Le statut est obligatoire</p>
+    </div>
+
+    <button class="btn btn-primary mt-3" type="submit" [disabled]="residenceForm.invalid" (click)="save()">Enregistrer</button>
+
+</form>

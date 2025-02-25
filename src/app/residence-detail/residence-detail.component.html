@@ -1,0 +1,18 @@
+<div class="container mt-4">
+    <div class="card shadow-lg">
+      <img [src]="residence.image" class="card-img-top" alt="Image de la résidence" *ngIf="residence.image">
+      <div class="card-body">
+        <h5 class="card-title">Détails de la Résidence</h5>
+        <p><strong>ID :</strong> {{ residence.id }}</p>
+        <h2 class="text-primary">{{ residence.name }}</h2>
+        <p><strong>Adresse :</strong> {{ residence.address }}</p>
+        <p><strong>Statut :</strong> 
+          <span [class.text-success]="residence.status === 'Active'" 
+                [class.text-danger]="residence.status === 'Inactive'">
+            {{ residence.status }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  
